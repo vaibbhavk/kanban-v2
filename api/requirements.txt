@@ -1,0 +1,12 @@
+Flask
+Flask-SQLAlchemy
+email_validator
+bcrypt
+flask_restful
+redis
+celery[redis]
+Flask-Caching
+flask-cors
+flask-jwt-extended
+pandas
+weasyprint

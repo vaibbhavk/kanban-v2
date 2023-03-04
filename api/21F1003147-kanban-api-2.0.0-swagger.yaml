@@ -1,0 +1,1259 @@
+openapi: 3.0.0
+info:
+  title: Kanban API 2.0
+  description: >
+    <div>Kanban API is the part of Modern Application Development - 2 project.
+    </div>
+    <br/>
+
+    <h3> 'users' Table Schema </h3> 
+    <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>Primary Key, Auto Increment</td>
+      </tr>
+      <tr>
+        <td>email</td>
+        <td>String</td>
+        <td>Unique, Not Null</td>
+      </tr>
+      <tr>
+        <td>password</td>
+        <td>String</td>
+        <td>Not Null</td>
+      </tr> 
+      <tr>
+        <td>username</td>
+        <td>String</td>
+        <td>Unique, Not Null</td>
+      </tr>      
+      <tr>
+        <td>created_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>       
+       <tr>
+        <td>updated_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>     
+    </tbody>
+    </table>
+
+    <h3> 'lists' Table Schema </h3> 
+    <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>list_id</td>
+        <td>Integer</td>
+        <td>Primary Key, Auto Increment</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>String</td>
+        <td>Not Null</td>
+      </tr>
+      <tr>
+        <td>user</td>
+        <td>Integer</td>
+        <td>Foreign Key (users.id), Not Null</td>
+      </tr>      
+      <tr>
+        <td>created_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>         
+      <tr>
+        <td>updated_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>         
+    </tbody>
+    </table>
+
+    <h3> 'cards' Table Schema </h3> 
+    <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>card_id</td>
+        <td>Integer</td>
+        <td>Primary Key, Auto Increment</td>
+      </tr>
+      <tr>
+        <td>title</td>
+        <td>String</td>
+        <td>Not Null</td>
+      </tr>
+      <tr>
+        <td>content</td>
+        <td>String</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>deadline</td>
+        <td>Date</td>
+        <td>Not Null</td>
+      </tr>
+      <tr>
+        <td>completed</td>
+        <td>Integer</td>
+        <td>Not Null</td>
+      </tr>
+      <tr>
+        <td>list</td>
+        <td>Integer</td>
+        <td>Foreign Key (lists.list_id), Not Null</td>
+      </tr>
+      <tr>
+        <td>completed_datetime</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>created_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>updated_at</td>
+        <td>Datetime</td>
+        <td></td>
+      </tr>
+    </tbody>
+    </table>
+    
+    <br/>
+
+    <h3> Error Codes </h3> 
+    <table>
+      <thead>
+        <th>Resource</th>
+        <th>Error Code</th>
+        <th>Message</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>User</td>
+        <td>U101</td>
+        <td>username is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U102</td>
+          <td>email is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U103</td>
+          <td>password is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U104</td>
+        <td>User does not exist</td>
+      </tr>
+       <tr>
+        <td>User</td>
+        <td>U105</td>
+        <td>User with this email already exits</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U106</td>
+        <td>This username is already taken</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U107</td>
+        <td>User with this email does not exist</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>U108</td>
+        <td>Incorrect password</td>
+      </tr>
+       <tr>
+        <td>User</td>
+        <td>U109</td>
+        <td>Username must be minimum 4 and maximum 24 characters in length</td>
+      </tr>
+       <tr>
+        <td>User</td>
+        <td>U110</td>
+        <td>Password must be minimum 6 and maximum 36 characters in length</td>
+      </tr>
+      <tr>
+        <td>List</td>
+        <td>L101</td>
+        <td>name is required</td>
+      </tr>
+      <tr>
+        <td>List</td>
+        <td>L102</td>
+        <td>user id is required</td>
+      </tr>
+      <tr>
+        <td>List</td>
+        <td>L103</td>
+        <td>Cannot create more than 5 lists for a user</td>
+      </tr>
+      <tr>
+        <td>List</td>
+        <td>L104</td>
+        <td>List does not exist</td>
+      </tr>
+      <tr>
+        <td>Card</td>
+        <td>C101</td>
+        <td>title is required</td>
+      </tr>
+       <tr>
+        <td>Card</td>
+        <td>C102</td>
+        <td>content is required</td>
+      </tr>
+       <tr>
+        <td>Card</td>
+        <td>C103</td>
+        <td>deadline is required</td>
+      </tr>
+       <tr>
+        <td>Card</td>
+        <td>C104</td>
+        <td>completed flag is required</td>
+      </tr>
+       <tr>
+        <td>Card</td>
+        <td>C105</td>
+        <td>list id is required</td>
+      </tr>
+       <tr>
+        <td>Card</td>
+        <td>C106</td>
+        <td>Card does not exist</td>
+      </tr>
+      <tr>
+        <td>Cards</td>
+        <td>CS101</td>
+        <td>from_list_id is required</td>
+      </tr>
+      <tr>
+        <td>Cards</td>
+        <td>CS102</td>
+        <td>to_list_id is required</td>
+      </tr>
+       <tr>
+        <td>Import</td>
+        <td>EI101</td>
+        <td>csv file is required</td>
+      </tr>
+       <tr>
+        <td>Import</td>
+        <td>EI102</td>
+        <td>Invalid csv file</td>
+      </tr>
+       <tr>
+        <td>Import</td>
+        <td>EI103</td>
+        <td>The file has no data</td>
+      </tr>
+    </tbody>
+    </table>
+
+  version: 2.0.0
+servers:
+  - url: http://127.0.0.1:5000/
+components:
+  securitySchemes:
+    bearerAuth:         
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   
+security:
+  - bearerAuth: [] 
+paths:
+  /api/user/register:
+    description: Url to create a user resource
+    post:
+      description: Operation to create a user resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: vaibhavk
+                email:
+                  type: string
+                  example: vk@gmail.com
+                password:
+                  type: string
+                  example: 12345678
+      responses:
+        '200':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                title: response object
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User registered successfully
+        '403':
+          description: Already Exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+                    
+  /api/user/logout:
+    description: Url to clear user specific cache.
+    get:
+      description: Operation to clear user specific cache.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User has been logged out successfully
+          content:
+            application/json:
+              schema:
+                title: response object
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User has been logged out successfully
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  /api/user/login:
+    description: Url to authenticate a user resource
+    post:
+      description: Operation to create a user resource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: vk@gmail.com
+                password:
+                  type: string
+                  example: 12345678
+      responses:
+        '200':
+          description: User details with JSON Web Token
+          content:
+            application/json:
+              schema:
+                title: response object
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: JSON Web Token
+                  id:
+                    type: integer
+                    example: 20
+                  username:
+                    type: string
+                    example: vaibhavk
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+  
+  /api/list/{id}:
+    description: Url to read, update and delete a list resource with list_id = id.
+    get:
+      description: Operation to Read list resource.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 124
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: list object
+                type: object
+                properties:
+                  list_id:
+                    type: integer
+                    example: 37
+                  name: 
+                    type: string
+                    example: In Progress
+                  user:
+                    type: integer
+                    example: 3
+                  created_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+
+    put:
+      description: Operation to update the list resource.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 37
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                    type: string
+                    example: To do
+      responses:
+        '200':
+          description: Successfuly updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list_id:
+                    type: integer
+                    example: 37
+                  name: 
+                    type: string
+                    example: To do
+                  user:
+                    type: integer
+                    example: 3
+                  created_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+    delete:
+      description: Operation to delete the list resource
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 37
+      responses:
+        '200':
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+
+  /api/list:
+    description: End point to create list resource
+    post:
+      description: Operation to create the list resource
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Done
+                user_id:
+                  type: integer
+                  example: 3
+      responses:
+        '201':
+          description: Successfully Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list_id:
+                    type: integer
+                    example: 38
+                  name: 
+                    type: string
+                    example: Done
+                  user:
+                    type: integer
+                    example: 3
+                  created_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at: 
+                    type: string
+                    example: null
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+          
+  /api/card/{id}:
+    description: Url to read, update and delete the card resource.
+    get:
+      description: Operation to read card resource
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 68
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: card object
+                type: object
+                properties:
+                  card_id:
+                    type: integer
+                    example: 68
+                  title:
+                    type: string
+                    example: Card Title
+                  content:
+                    type: string
+                    example: Card Content
+                  deadline:
+                    type: string
+                    example: 2022-10-27
+                  completed:
+                    type: integer
+                    example: 0
+                  list:
+                    type: integer
+                    example: 38
+                  created_at:
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at:
+                    type: string
+                    example: null
+                  completed_datetime:
+                    type: string
+                    example: null
+        '500':
+          description: Internal server error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+
+    put:
+      description: Operation to update the card resource
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 68
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                    type: string
+                    example: Card Title
+                content:
+                  type: string
+                  example: Card Content
+                deadline:
+                  type: string
+                  example: 2022-10-27
+                completed:
+                  type: integer
+                  example: 0
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  card_id:
+                    type: integer
+                    example: 68
+                  title:
+                    type: string
+                    example: Card Title
+                  content:
+                    type: string
+                    example: Card Content
+                  deadline:
+                    type: string
+                    example: 2022-10-27
+                  completed:
+                    type: integer
+                    example: 0
+                  list:
+                    type: integer
+                    example: 38
+                  created_at:
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at:
+                    type: string
+                    example: null
+                  completed_datetime:
+                    type: string
+                    example: null
+        '404':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+    delete:
+      description: Operation to delete the card resource
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 68
+      responses:
+        '200':
+          description: Successfully Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+
+  /api/card:
+    description: Url to create card resource
+    post:
+      description: Operation to create the card resource
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Card Title
+                content:
+                  type: string
+                  example: Card Content
+                deadline:
+                  type: string
+                  example: 2022-10-27
+                completed:
+                  type: integer
+                  example: 0
+                list:
+                  type: integer
+                  example: 38
+      responses:
+        '201':
+          description: Successfully Created
+          content:
+            application/json:
+              schema:
+                title: student object
+                type: object
+                properties:
+                  card_id:
+                    type: integer
+                    example: 68
+                  title:
+                    type: string
+                    example: Card Title
+                  content:
+                    type: string
+                    example: Card Content
+                  deadline:
+                    type: string
+                    example: 2022-10-27
+                  completed:
+                    type: integer
+                    example: 0
+                  list:
+                    type: integer
+                    example: 38
+                  created_at:
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at:
+                    type: string
+                    example: null
+                  completed_datetime:
+                    type: string
+                    example: null
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+                    
+                    
+  /api/card/{card_id}/{list_id}:
+    description: Url to patch the card resource.
+    patch:
+      description: Operation to patch card resource
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: card_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - in: path
+          name: list_id
+          required: true
+          schema:
+            type: integer
+            example: 6
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: card object
+                type: object
+                properties:
+                  card_id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: Card Title
+                  content:
+                    type: string
+                    example: Card Content
+                  deadline:
+                    type: string
+                    example: 2022-10-27
+                  completed:
+                    type: integer
+                    example: 0
+                  list:
+                    type: integer
+                    example: 6
+                  created_at:
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at:
+                    type: string
+                    example: null
+                  completed_datetime:
+                    type: string
+                    example: null
+        '500':
+          description: Internal server error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
+
+
+  /api/lists:
+    description: Url to read all list resource of a user.
+    get:
+      description: Operation to read all list resource of a user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: list object
+                type: object
+                properties:
+                  list_id:
+                    type: integer
+                    example: 37
+                  name: 
+                    type: string
+                    example: In Progress
+                  user:
+                    type: integer
+                    example: 3
+                  cards:
+                    items:
+                      properties:
+                        card_id:
+                          type: integer
+                          example: 68
+                        title:
+                          type: string
+                          example: Card Title
+                        content:
+                          type: string
+                          example: Card Content
+                        deadline:
+                          type: string
+                          example: 2022-10-27
+                        completed:
+                          type: integer
+                          example: 0
+                        list:
+                          type: integer
+                          example: 38
+                        created_at:
+                          type: string
+                          example: Fri, 30 Sep 2022 14:16:46 -0000
+                        updated_at:
+                          type: string
+                          example: null
+                        completed_datetime:
+                          type: string
+                          example: null
+                  created_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+                  updated_at: 
+                    type: string
+                    example: Fri, 30 Sep 2022 14:16:46 -0000
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  /api/cards:
+    description: End point to move all cards to another list and delete the list.
+    post:
+      description: Operation to move all cards to another list and delete the list
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from _list_id:
+                  type: integer
+                  example: 32
+                to_list_id:
+                  type: integer
+                  example: 35
+      responses:
+        '200':
+          description: Cards moved and list deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Cards moved and list deleted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  /api/user/summary:
+    description: Url to get summary of a user.
+    get:
+      description: Operation to get summary of a user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: response object
+                type: object
+                properties:
+                  list_id:
+                    type: integer
+                    example: 84
+                  name: 
+                    type: string
+                    example: In Progress
+                  total:
+                    type: integer
+                    example: 1
+                  total_completed:
+                    type: integer
+                    example: 1
+                  total_incomplete:
+                    type: integer
+                    example: 0
+                  d_passed:
+                    type: integer
+                    example: 0
+                  date_count:
+                    type: array
+                    items:
+                      type: string
+                    example: ["2022-11-30", "2022-11-30", "2022-11-29"]
+                  date_labels:
+                    type: array
+                    items:
+                      type: string
+                    example: ["2022-11-30", "2022-11-29"]
+                  date_data:
+                    type: array
+                    items:
+                      type: string
+                    example: ["2", "1"]
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  /api/export:
+    description: Url to run async job of export csv.
+    get:
+      description: Operation to run async job of export csv
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  /api/export/{id}:
+    description: Url to run async job of export csv by list id.
+    get:
+      description: Operation to run async job of export csv by list id
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 71
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+        '401':
+          description: Unauthorized
+          
+  
+  
+  /api/import:
+    description: Url to run async job of import csv
+    post:
+      description: Operation to run async job of import csv
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Data imported successfully
+          content:
+            application/json:
+              schema:
+                title: response object
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Data imported successfully
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '401':
+          description: Unauthorized
