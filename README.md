@@ -26,7 +26,7 @@ Run Locally -
 
 - Go to the 'api' directory from the project root directory.
 
-- Create a virtual environment.
+- Create a virtual environment
 
 ```cmd
     py -3 -m venv venv_name
@@ -50,7 +50,7 @@ Run Locally -
     python main.py
 ```
 
-- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the documentation.
+- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the [documentation](https://github.com/vaibbhavk/kanban-v2/blob/main/kanban-api-2.0.0-swagger.yaml).
 
 ### To run the client:-
 
