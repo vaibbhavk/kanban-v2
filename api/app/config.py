@@ -32,7 +32,6 @@ class LocalDevelopmentConfig(Config):
     CACHE_REDIS_HOST = "localhost"
     CACHE_REDIS_PORT = 6379
     CACHE_REDIS_DB = 9
-    GOOGLE_WEBHOOK_RECEIVER_URL = "https://chat.googleapis.com/v1/spaces/AAAAqn_LZfk/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=JznpFu4Q4TtxvMK84Lysrw2ngPezUaesmFMeE5qblww%3D"
     SMTP_SERVER_HOST = "localhost"
     SMTP_SERVER_PORT = 1025
     SENDER_ADDRESS = "vaibhav@email.com"
