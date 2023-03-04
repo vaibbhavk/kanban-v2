@@ -20,6 +20,8 @@ Run Locally -
 
 - Make sure you have these installed in your system: Node.js, Python, and Redis.
 
+- You must have the credentials of SMTP server for sending mails.
+
 ### To run the server:-
 
 - Go to the 'api' directory from the project root directory.
