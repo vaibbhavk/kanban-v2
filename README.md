@@ -50,7 +50,7 @@ Run Locally -
     python main.py
 ```
 
-- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the [documentation](https://github.com/vaibbhavk/kanban-v2/blob/main/kanban-api-2.0.0-swagger.yaml).
+- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the [documentation](https://app.swaggerhub.com/apis/vaibbhavk/kanban-api/2.0.0).
 
 ### To run the client:-
 
