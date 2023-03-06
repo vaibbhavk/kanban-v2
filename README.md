@@ -1,5 +1,9 @@
 # A Kanban application for managing and tracking tasks for a project in a professional or personal setting.
 
+## Documentation
+
+[API documentation](https://docs.google.com/document/d/e/2PACX-1vRLDboJS0V0lN9vhqVsF4pH9ZjA62554IotDS2JCav6yriT89gfPB0Hx6fhrjD6cg/pub)
+
 ### Front-End - Vue, Bootstrap
 
 ### Back-End - Flask, SQLite, Redis
@@ -50,7 +54,7 @@ Run Locally -
     python main.py
 ```
 
-- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the [documentation](https://app.swaggerhub.com/apis/vaibbhavk/kanban-api/2.0.0).
+- Server will be running on `http://localhost:5000/`. To know about the API endpoints, see the [API documentation](https://app.swaggerhub.com/apis/vaibbhavk/kanban-api/2.0.0).
 
 ### To run the client:-
 
@@ -70,13 +74,12 @@ Run Locally -
 
 - Client will be running on `http://localhost:3000/`.
 
-
-
 ## Environment Variables
 
 To run the server, you will need to add the following environment variables to your .env file
 
 `NO_ENV_FOR_NOW`
+
 ## Author
 
 - [@vaibbhavk](https://www.github.com/vaibbhavk)
