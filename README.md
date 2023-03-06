@@ -6,7 +6,7 @@
 
 ### Front-End - Vue, Bootstrap
 
-### Back-End - Flask, SQLite, Redis
+### Back-End - Flask, SQLite, Redis, Celery, JWT
 
 Run Locally -
 
